@@ -1,24 +1,31 @@
-# README
+# DWH API
+## Installation
+### Ruby, Rails and dependencies
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Install [rvm](https://rvm.io/).
 
-Things you may want to cover:
+Install ruby:
 
-* Ruby version
+```rvm install ruby-2.6.3```
 
-* System dependencies
+Instal dependencies:
 
-* Configuration
+```bundle install```
 
-* Database creation
+### Database
 
-* Database initialization
+Application is using Postgres database.
 
-* How to run the test suite
+Create database:
 
-* Services (job queues, cache servers, search engines, etc.)
+```rake db:create```
 
-* Deployment instructions
+Run all migrations:
 
-* ...
+```rake db:migrate```
+
+## Usage
+
+Start server:
+
+```rails s```
