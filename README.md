@@ -29,7 +29,7 @@ Run all migrations:
 Example data:
 
 ```
-dc = DatabaseCredentials.create(user: 'user', password: 'password', database: 'postgres', host: 'localhost', port: '5432')
+dc = DatabaseCredential.create(user: 'user', password: 'password', database: 'postgres', host: 'localhost', port: '5432')
 token = Token.create(name: 'my_token')
 Endpoint.create(query: 'select * from people;', token: token, database_credential: dc, name: 'test_endpoint')
 ```
