@@ -21,7 +21,7 @@ class RemoteQueryService
 
   def query_with_replaced_fields
     replace_fields = @endpoint.query.scan(/%{(.+?)}/).flatten.uniq
-    return query if replace_fields.empty?
+    return @endpoint.query if replace_fields.empty?
 
     query = @endpoint.query
     replace_fields.each do |field|
