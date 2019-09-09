@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_08_152332) do
+ActiveRecord::Schema.define(version: 2019_09_09_130751) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,22 @@ ActiveRecord::Schema.define(version: 2019_08_08_152332) do
     t.string "name", null: false
     t.index ["database_credential_id"], name: "index_endpoints_on_database_credential_id"
     t.index ["token_id"], name: "index_endpoints_on_token_id"
+  end
+
+  create_table "request_logs", force: :cascade do |t|
+    t.string "endpoint", null: false
+    t.string "token", null: false
+    t.string "status", null: false
+    t.string "http_protocol", null: false
+    t.float "db_duration", null: false
+    t.float "total_duration", null: false
+    t.string "error_message"
+    t.string "server_name"
+    t.jsonb "params", default: "{}", null: false
+    t.inet "ip_address", null: false
+    t.boolean "email_sended", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "tokens", force: :cascade do |t|
