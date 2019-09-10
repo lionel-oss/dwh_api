@@ -39,3 +39,14 @@ Endpoint.create(query: 'select * from people;', token: token, database_credentia
 Start server:
 
 ```rails s```
+
+## Rails Admin
+
+Application is using Rails Admin as simple soultion for CRUD actions.
+By default, Rails Admin is accessible by `/admin` URL.
+
+## User Creation
+
+```
+User.create(login: 'login', email: 'email@example.com', password: 'password')
+```
