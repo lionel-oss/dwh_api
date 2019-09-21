@@ -10,10 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_10_093126) do
+ActiveRecord::Schema.define(version: 2019_09_21_102622) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "access_level_endpoints", force: :cascade do |t|
+    t.bigint "access_level_id"
+    t.bigint "endpoint_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["access_level_id"], name: "index_access_level_endpoints_on_access_level_id"
+    t.index ["endpoint_id"], name: "index_access_level_endpoints_on_endpoint_id"
+  end
+
+  create_table "access_levels", force: :cascade do |t|
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "database_credentials", force: :cascade do |t|
     t.string "user", null: false
@@ -28,14 +43,12 @@ ActiveRecord::Schema.define(version: 2019_09_10_093126) do
 
   create_table "endpoints", force: :cascade do |t|
     t.text "query", null: false
-    t.bigint "token_id", null: false
     t.bigint "database_credential_id", null: false
     t.boolean "is_active", default: true, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name", null: false
     t.index ["database_credential_id"], name: "index_endpoints_on_database_credential_id"
-    t.index ["token_id"], name: "index_endpoints_on_token_id"
   end
 
   create_table "request_logs", force: :cascade do |t|
@@ -59,6 +72,8 @@ ActiveRecord::Schema.define(version: 2019_09_10_093126) do
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "access_level_id"
+    t.index ["access_level_id"], name: "index_tokens_on_access_level_id"
     t.index ["code"], name: "index_tokens_on_code"
   end
 

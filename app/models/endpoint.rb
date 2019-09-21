@@ -1,9 +1,10 @@
 class Endpoint < ApplicationRecord
-  belongs_to :token
   belongs_to :database_credential
+  has_many :access_level_endpoints
+  has_many :access_levels, through: :access_level_endpoints
+  has_many :tokens, through: :access_levels
 
   validates :query, presence: true
-  validates :token, presence: true
   validates :is_active, inclusion: { in: [true, false] }
   validates :name, presence: true, uniqueness: true
 
@@ -14,8 +15,10 @@ class Endpoint < ApplicationRecord
       field :name
       field :query
       field :is_active
-      field :token
+      field :access_levels
       field :database_credential
     end
+
+    exclude_fields :access_level_endpoints
   end
 end

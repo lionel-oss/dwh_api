@@ -2,13 +2,12 @@ class RemoteQueryController < ApplicationController
   include ApplicationHelper
 
   def show
-    endpoint = Endpoint
-               .active
-               .joins(:token)
-               .find_by(
-                 name: endpoint_params[:name],
-                 tokens: { code: endpoint_params[:token] }
-               )
+    endpoint = Endpoint.active
+                 .joins(:tokens)
+                 .find_by(
+                   name: endpoint_params[:name],
+                   tokens: { code: endpoint_params[:token] }
+                 )
     result = RemoteQueryService.new(endpoint, endpoint_params[:replace_fields]).call
 
     respond_to do |format|
