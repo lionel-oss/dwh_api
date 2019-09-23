@@ -1,6 +1,6 @@
 class Endpoint < ApplicationRecord
   belongs_to :database_credential
-  has_many :access_level_endpoints
+  has_many :access_level_endpoints, dependent: :destroy
   has_many :access_levels, through: :access_level_endpoints
   has_many :tokens, through: :access_levels
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_21_102622) do
+ActiveRecord::Schema.define(version: 2019_09_23_152704) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,8 +20,7 @@ ActiveRecord::Schema.define(version: 2019_09_21_102622) do
     t.bigint "endpoint_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["access_level_id"], name: "index_access_level_endpoints_on_access_level_id"
-    t.index ["endpoint_id"], name: "index_access_level_endpoints_on_endpoint_id"
+    t.index ["access_level_id", "endpoint_id"], name: "index_access_level_endpoints_on_access_level_id_and_endpoint_id", unique: true
   end
 
   create_table "access_levels", force: :cascade do |t|

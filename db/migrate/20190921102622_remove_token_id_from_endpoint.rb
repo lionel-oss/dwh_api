@@ -1,5 +1,5 @@
 class RemoveTokenIdFromEndpoint < ActiveRecord::Migration[5.2]
   def change
-    remove_column :endpoints, :token_id
+    remove_column :endpoints, :token_id, :integer
   end
 end
