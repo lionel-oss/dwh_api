@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_23_152704) do
+ActiveRecord::Schema.define(version: 2019_09_25_092033) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "access_level_endpoints", force: :cascade do |t|
-    t.bigint "access_level_id"
-    t.bigint "endpoint_id"
+    t.bigint "access_level_id", null: false
+    t.bigint "endpoint_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["access_level_id", "endpoint_id"], name: "index_access_level_endpoints_on_access_level_id_and_endpoint_id", unique: true
@@ -99,4 +99,6 @@ ActiveRecord::Schema.define(version: 2019_09_23_152704) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
+  add_foreign_key "access_level_endpoints", "access_levels", on_delete: :cascade
+  add_foreign_key "access_level_endpoints", "endpoints", on_delete: :cascade
 end
