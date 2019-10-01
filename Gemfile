@@ -25,6 +25,8 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'devise'
 gem 'rails_admin', '~> 2.0'
+gem 'swagger-docs'
+gem 'swagger-ui_rails'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

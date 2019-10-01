@@ -1,5 +1,7 @@
 class ApplicationController < ActionController::Base
 
+  include Swagger::Docs::Methods
+
   before_action :reload_rails_admin, if: :rails_admin_path?
 
   private
