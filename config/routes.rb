@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   resources :remote_query, only: [:show], param: :name, path: 'api', defaults: {format: :json}
 
-  root 'application#index'
+  root 'rails_admin/main#dashboard'
   get 'swagger_docs' => 'swagger#swagger_docs'
   get 'api_docs' => 'swagger#api_docs'
   get '/docs/:resource_name' => 'swagger#resource_docs'

@@ -52,9 +52,10 @@ rails c
 - Example data:
 
 ```
-dc = DatabaseCredential.create(user: 'user', password: 'password', database: 'postgres', host: 'localhost', port: '5432')
-token = Token.create(name: 'my_token')
-Endpoint.create(query: 'select * from people;', token: token, database_credential: dc, name: 'test_endpoint')
+db_credential = DatabaseCredential.create(user: 'user', password: 'password', database: 'postgres', host: 'localhost', port: '5432')
+access_level = AccessLevel.create(description: 'Test level')
+access_level.tokens.create(name: 'my_token')
+access_level.endpoints.create(query: 'select * from people;', database_credential: db_credential, name: 'test_endpoint')
 ```
 
 ![Alt Text](/public/docs/img/data_population.gif)
@@ -65,13 +66,29 @@ Start server:
 
 - ```rails s```
 
-Api call:
+URL for the app:
+
+- ```http://localhost:3000```
+
+Api call for json:
 
 ```
 curl 'localhost:3000/api/endpoint_name?token=your_token' | json_pp
 ```
 
+for csv:
+
+```
+curl 'localhost:3000/api/endpoint_name.csv?token=your_token' | column -t -s, | less -S
+```
+
 ![Alt Text](/public/docs/img/curl_json.gif)
+
+Swagger documentation for available endpoints by token:
+
+```
+http://localhost:3000/swagger_docs?token=your_token
+```
 
 ## Rails Admin
 
@@ -92,6 +109,10 @@ User.create(login: 'login', email: 'email@example.com', password: 'password')
 - **DWH APIs**: Overview of Main Admin Page.
 
   ![](/public/docs/img/main.png)
+
+- **Access Levels**: Overview of Access Levels Page.
+
+  ![](/public/docs/img/access-levels.png)
 
 - **Database Credentials**: Overview of all Database Crenedtials with CRUD possibility.
 
@@ -116,3 +137,7 @@ User.create(login: 'login', email: 'email@example.com', password: 'password')
 - **Users**: Overview of all Users with CRUD possibility.
 
   ![](/public/docs/img/list-of-users.png)
+
+- **API docs**: Overview of all endpoints which accessible by token.
+
+  ![](/public/docs/img/swagger-docs.png)

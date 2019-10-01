@@ -13,7 +13,7 @@ class SwaggerController < ActionController::Base
     result = Swagger::Docs::Generator.generate_docs.values.first
     @root = result[:root]
     @root.delete 'resources'
-    @root['basePath'] = root_url.chomp('/')
+    @root['basePath'] = Rails.application.config.site_url
     proceed_root_apis
     render json: @root.to_json
   end
@@ -26,10 +26,10 @@ class SwaggerController < ActionController::Base
   private
 
   def generate_docs
-    result = Swagger::Docs::Generator.generate_docs.values.first
-    result[:root]['resources'].first['apis'] += generate_custom_api_docs if result[:root]['resources'].first
+    resources = Swagger::Docs::Generator.generate_docs.values.first[:root]['resources']
+    resources.first['apis'] += generate_custom_api_docs if resources.first
 
-    result[:root]['resources'].each do |resource|
+    resources.each do |resource|
       resource_file_path = resource.delete 'resourceFilePath'
       self.class.send :define_method, resource_file_path do
         Rails.logger.info session[:accessible_endpoints]
