@@ -1,6 +1,8 @@
 class RemoteQueryController < ApplicationController
   include ApplicationHelper
 
+  swagger_controller :remote_query, 'Available endpoints'
+
   def show
     endpoint = Endpoint.active
                  .joins(:tokens)

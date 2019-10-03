@@ -10,6 +10,7 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
+ *= require swagger-ui
  *= require_tree .
  *= require_self
  */
@@ -70,4 +71,43 @@
   border-radius: 5px;
   padding: 5px;
   margin-bottom: 5px;
+}
+
+.swagger-ui-wrap.header {
+    padding: 20px 0 0 0;
+}
+
+.swagger-ui-wrap.header img {
+    float: left;
+}
+
+.swagger-ui-wrap.header p {
+    width: 83%;
+    float: left;
+    position: relative;
+    padding-top: 22px;
+    font-size: 20px;
+    color: #333333;
+}
+
+.swagger-ui-wrap ul#resources li.resource ul.endpoints li.endpoint ul.operations li.operation.get div.heading {
+    background-color: #fff;
+    border: 1px solid #ccc;
+}
+
+.swagger-ui-wrap ul#resources li.resource ul.endpoints li.endpoint ul.operations li.operation div.heading h3 span.path a {
+    color: #333333;
+}
+
+.swagger-ui-wrap ul#resources li.resource ul.endpoints li.endpoint ul.operations li.operation.get div.heading ul.options li a {
+    color: #ff5909;
+}
+
+.swagger-ui-wrap ul#resources li.resource ul.endpoints li.endpoint ul.operations li.operation.get div.heading h3 span.http_method a {
+    background-color: #ff5909;
+}
+
+.swagger-ui-wrap ul#resources li.resource ul.endpoints li.endpoint ul.operations li.operation.get div.content {
+    background-color: #f1ede8;
+    border: 1px solid #ccc;
 }
