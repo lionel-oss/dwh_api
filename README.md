@@ -82,6 +82,26 @@ for csv:
 curl 'localhost:3000/api/endpoint_name.csv?token=your_token' | column -t -s, | less -S
 ```
 
+
+Api call with replaced fields:
+
+- SQL:
+```
+SELECT %{first_field} FROM USERS WHERE %{second_field};
+```
+
+- Curl example:
+```
+curl -X GET \
+  'http://localhost:3000/api/qwerty?token=N9jarX9rKEUs4dmF2N6MQCx1&replace_fields%5Bfirst_field%5D=email&replace_fields%5Bsecond_field%5D=name%20is%20not%20null' | json_pp
+```
+
+- Postman example:
+```
+http://localhost:3000/api/qwerty?token=N9jarX9rKEUs4dmF2N6MQCx1&replace_fields[first_field]=email&replace_fields[second_field]=name is not null
+```
+
+
 ![Alt Text](/public/docs/img/curl_json.gif)
 
 Swagger documentation for available endpoints by token:
