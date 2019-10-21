@@ -51,24 +51,42 @@ class SwaggerController < ActionController::Base
     api_queries.each_with_object([]) do |query, result|
 
       result << {
-        'path' => "/#{query.name}",
-        'operations'=> [{
-                          'summary' => query.name,
-                          'parameters' => [{
-                                             paramType: 'query',
-                                             name: 'token',
-                                             type: 'string',
-                                             description: 'User Token',
-                                             required: true
+        path: "/#{query.name}",
+        operations: [{
+                        summary: query.name,
+                        parameters: [{
+                                       paramType: 'query',
+                                       name: 'token',
+                                       type: 'string',
+                                       description: 'User Token',
+                                       required: true
+                                     },
+                                     {
+                                       paramType: 'query',
+                                       name: 'replace_fields[first_field]',
+                                       type: 'string',
+                                       description: 'First replaceable field',
+                                     },
+                                     {
+                                       paramType: 'query',
+                                       name: 'replace_fields[second_field]',
+                                       type: 'string',
+                                       description: 'Second replaceable field',
+                                     },
+                                     {
+                                       paramType: 'query',
+                                       name: 'replace_fields[third_field]',
+                                       type: 'string',
+                                       description: 'Тhird replaceable field',
+                                     }],
+                        responseMessages: [{
+                                             cod: 401,
+                                             responseModel: nil,
+                                             message: 'Unauthorized'
                                            }],
-                          'responseMessages' => [{
-                                                   'code' => 401,
-                                                   'responseModel' => nil,
-                                                   'message' => 'Unauthorized'
-                                                 }],
-                          'nickname' => "Endpoints##{query.name}",
-                          'method' => :get
-                        }]
+                        nickname: "Endpoints##{query.name}",
+                        method: 'get'
+                    }]
       }
     end
   end
