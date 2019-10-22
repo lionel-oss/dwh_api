@@ -54,31 +54,7 @@ class SwaggerController < ActionController::Base
         path: "/#{query.name}",
         operations: [{
                         summary: query.name,
-                        parameters: [{
-                                       paramType: 'query',
-                                       name: 'token',
-                                       type: 'string',
-                                       description: 'User Token',
-                                       required: true
-                                     },
-                                     {
-                                       paramType: 'query',
-                                       name: 'replace_fields[first_field]',
-                                       type: 'string',
-                                       description: 'First replaceable field',
-                                     },
-                                     {
-                                       paramType: 'query',
-                                       name: 'replace_fields[second_field]',
-                                       type: 'string',
-                                       description: 'Second replaceable field',
-                                     },
-                                     {
-                                       paramType: 'query',
-                                       name: 'replace_fields[third_field]',
-                                       type: 'string',
-                                       description: 'Тhird replaceable field',
-                                     }],
+                        parameters: generate_params(query),
                         responseMessages: [{
                                              cod: 401,
                                              responseModel: nil,
@@ -89,5 +65,26 @@ class SwaggerController < ActionController::Base
                     }]
       }
     end
+  end
+
+  def generate_params(endpoint)
+    replace_fields = endpoint.query.scan(/%{(.+?)}/).flatten.uniq
+    params = replace_fields.map do |field|
+      {
+        paramType: 'query',
+        name: "replace_fields[#{field}]",
+        type: 'string',
+        description: 'Replaceable field',
+        required: true
+      }
+    end
+
+    params << {
+      paramType: 'query',
+      name: 'token',
+      type: 'string',
+      description: 'User Token',
+      required: true
+    }
   end
 end
