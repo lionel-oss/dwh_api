@@ -1,7 +1,6 @@
 %ul.nav.navbar-nav.navbar-right.root_links
   - actions(:root).select(&:show_in_navigation).each do |action|
     %li{class: "#{action.action_name}_root_link"}= link_to wording_for(:menu, action), { action: action.action_name, controller: 'rails_admin/main' }, class: action.pjax? ? "pjax" : ""
-  %li= link_to 'Swagger docs', main_app.swagger_docs_path(token: Token.find_by(access_level: AccessLevel.first).try(:code))
   - if _current_user
     - if user_link = edit_user_link
       %li.edit_user_root_link= user_link
