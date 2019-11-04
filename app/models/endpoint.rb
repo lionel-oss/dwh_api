@@ -6,6 +6,7 @@ class Endpoint < ApplicationRecord
 
   validates :query, presence: true
   validates :is_active, inclusion: { in: [true, false] }
+  validates :replaced_fields_required, inclusion: { in: [true, false] }
   validates :name, presence: true, uniqueness: true
 
   scope :active, -> { where(is_active: true) }
