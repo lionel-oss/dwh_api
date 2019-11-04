@@ -72,7 +72,7 @@ class SwaggerController < ActionController::Base
     params = replace_fields.map do |field|
       {
         paramType: 'query',
-        name: "replace_fields[#{field}]",
+        name: field,
         type: 'string',
         description: 'Replaceable field',
         required: true
