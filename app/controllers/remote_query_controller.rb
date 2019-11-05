@@ -10,7 +10,7 @@ class RemoteQueryController < ApplicationController
                    name: endpoint_params[:name],
                    tokens: { code: endpoint_params[:token] }
                  )
-    result = RemoteQueryService.new(endpoint, endpoint_params[:replace_fields]).call
+    result = RemoteQueryService.new(endpoint, params.except(:name, :token)).call
 
     respond_to do |format|
       format.csv { send_data to_csv(result[:response][:result]),
@@ -23,6 +23,6 @@ class RemoteQueryController < ApplicationController
   private
 
   def endpoint_params
-    params.permit(:name, :token, replace_fields: {})
+    params.permit(:name, :token)
   end
 end

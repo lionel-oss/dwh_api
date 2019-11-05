@@ -93,12 +93,12 @@ SELECT %{first_field} FROM USERS WHERE %{second_field};
 - Curl example:
 ```
 curl -X GET \
-  'http://localhost:3000/api/qwerty?token=your_token&replace_fields%5Bfirst_field%5D=email&replace_fields%5Bsecond_field%5D=name%20is%20not%20null' | json_pp
+  'http://localhost:3000/api/qwerty?token=your_token&first_field=email&second_field=name%20is%20not%20null' | json_pp
 ```
 
 - Postman example:
 ```
-http://localhost:3000/api/qwerty?token=your_token&replace_fields[first_field]=email&replace_fields[second_field]=name is not null
+http://localhost:3000/api/qwerty?token=your_token&first_field=email&second_field=name is not null
 ```
 
 

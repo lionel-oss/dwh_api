@@ -49,7 +49,6 @@ class SwaggerController < ActionController::Base
   def generate_custom_api_docs
     api_queries = Endpoint.where(name: session[:accessible_endpoints])
     api_queries.each_with_object([]) do |query, result|
-
       result << {
         path: "/#{query.name}",
         operations: [{
@@ -70,13 +69,14 @@ class SwaggerController < ActionController::Base
   def generate_params(endpoint)
     replace_fields = endpoint.query.scan(/%{(.+?)}/).flatten.uniq
     params = replace_fields.map do |field|
-      {
+      replace_field_params = {
         paramType: 'query',
-        name: "replace_fields[#{field}]",
+        name: field,
         type: 'string',
         description: 'Replaceable field',
-        required: true
       }
+      replace_field_params[:required] = true if endpoint.replaced_fields_required
+      replace_field_params
     end
 
     params << {
