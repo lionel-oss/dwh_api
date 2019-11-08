@@ -25,7 +25,8 @@ class RemoteQueryService
 
     query = @endpoint.query
     replace_fields.each do |field|
-      query = query.gsub("%{#{field}}", @replace_values[field])
+      field_value = fetch_field_value(@replace_values[field])
+      query = query.gsub("%{#{field}}", field_value)
     end
     query
   end
@@ -42,5 +43,13 @@ class RemoteQueryService
 
   def format_result(status, response)
     { status: status, response: response }
+  end
+
+  def fetch_field_value(value)
+    if @endpoint.replaced_fields_required
+      value
+    else
+      value ? value : 'NULL'
+    end
   end
 end
