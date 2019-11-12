@@ -82,6 +82,7 @@ for csv:
 curl 'localhost:3000/api/endpoint_name.csv?token=your_token' | column -t -s, | less -S
 ```
 
+![Alt Text](/public/docs/img/curl_json.gif)
 
 Api call with replaced fields:
 
@@ -101,8 +102,35 @@ curl -X GET \
 http://localhost:3000/api/qwerty?token=your_token&first_field=email&second_field=name is not null
 ```
 
+## Replaceable Fields: Hints for use
 
-![Alt Text](/public/docs/img/curl_json.gif)
+The input must be preceded  by the percentage symbol and surrounded by curly brackets as such `%{field_name}` where field_name will be the call for the field.
+
+Therefore the simplest query would be `SELECT %{field_name};` and the curl would thus be `http://localhost:3000/api/your_endpoint?token=your_token&field_name=your_input`
+
+If your input is a string, you must surround it with single quotes as such: `http://localhost:3000/api/your_endpoint?token=your_token&field_name='your_input'`
+
+You have the option of making your replaceable fields a requirement or not, by using the tick on “Replaced fields required”. This will make all your replaced fields required, or all of them off. If the field is thus not defined in the curl, it will return null. It is thus recommended that you use logic in your query to make use of this case. Example below:
+
+```
+select id,
+  login, 
+  email
+from users
+where login = COALESCE (%{user_name}, login); 
+```
+
+Here we have set it up so that when no input is chosen, it will return all values in the database, and when a specific user name (aka login) is chosen, only their information will be returned. The curl for both cases would thus look like this:
+
+For all:
+```
+http://localhost:3000/api/your_endpoint?token=your_token
+```
+
+For only “user”:
+```
+http://localhost:3000/api/your_endpoint?token=your_token&user_name='user'
+```
 
 Swagger documentation for available endpoints by token:
 
