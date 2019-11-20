@@ -16,6 +16,6 @@ class Token < ApplicationRecord
   end
 
   def swagger_link
-    link_to 'open doc', Rails.application.routes.url_helpers.swagger_docs_path(token: code)
+    link_to 'open doc', "#{Rails.application.routes.url_helpers.swagger_docs_path(token: code)}#!/remote_query"
   end
 end

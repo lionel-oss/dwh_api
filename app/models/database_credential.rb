@@ -6,7 +6,7 @@ class DatabaseCredential < ApplicationRecord
   validates :port, presence: true
 
   def password
-    super ? encryptor.decrypt_and_verify(super) : ''
+    super.blank? ? '' : encryptor.decrypt_and_verify(super)
   end
 
   def password=(plain_data)
@@ -20,11 +20,11 @@ class DatabaseCredential < ApplicationRecord
     exclude_fields :salt
 
     object_label_method do
-      :custom_label_method
+      :object_label
     end
   end
 
-  def custom_label_method
+  def object_label
     name || id
   end
 
