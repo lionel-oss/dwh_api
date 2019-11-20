@@ -12,13 +12,13 @@ class Endpoint < ApplicationRecord
   scope :active, -> { where(is_active: true) }
 
   rails_admin do
-    list do
-      field :name
-      field :query
-      field :is_active
-      field :access_levels
-      field :database_credential
-    end
+    fields :name,
+           :query,
+           :is_active,
+           :access_levels,
+           :database_credential,
+           :tokens,
+           :replaced_fields_required
 
     exclude_fields :access_level_endpoints
   end
