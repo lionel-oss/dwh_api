@@ -38,7 +38,7 @@ class RemoteQueryService
       @endpoint.database_credential.database,
       @endpoint.database_credential.user,
       @endpoint.database_credential.password
-  ]
+    ]
   end
 
   def format_result(status, response)

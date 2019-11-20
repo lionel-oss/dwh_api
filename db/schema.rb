@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_04_080010) do
+ActiveRecord::Schema.define(version: 2019_11_20_100557) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,13 +31,14 @@ ActiveRecord::Schema.define(version: 2019_11_04_080010) do
 
   create_table "database_credentials", force: :cascade do |t|
     t.string "user", null: false
-    t.string "password", null: false
+    t.string "password"
     t.string "database", null: false
     t.string "host", null: false
     t.string "port", null: false
-    t.string "salt", null: false
+    t.string "salt"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name"
   end
 
   create_table "endpoints", force: :cascade do |t|

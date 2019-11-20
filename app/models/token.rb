@@ -8,7 +8,7 @@ class Token < ApplicationRecord
 
   rails_admin do
     list do
-      fields :id, :code, :created_at, :access_level
+      fields :id, :name, :code, :created_at, :access_level
       field :swagger_link do
         label 'Swagger'
       end

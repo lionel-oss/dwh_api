@@ -1,19 +1,31 @@
 class DatabaseCredential < ApplicationRecord
   has_many :endpoints
   validates :user, presence: true
-  validates :password, presence: true
   validates :database, presence: true
   validates :host, presence: true
   validates :port, presence: true
-  validates :salt, presence: true
 
   def password
-    encryptor.decrypt_and_verify(super)
+    super ? encryptor.decrypt_and_verify(super) : ''
   end
 
   def password=(plain_data)
     encrypted_data = encryptor.encrypt_and_sign(plain_data)
     super(encrypted_data)
+  end
+
+  rails_admin do
+    fields :id, :name, :user, :database, :password, :host, :port, :created_at
+
+    exclude_fields :salt
+
+    object_label_method do
+      :custom_label_method
+    end
+  end
+
+  def custom_label_method
+    name || id
   end
 
   private
