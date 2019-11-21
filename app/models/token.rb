@@ -8,7 +8,7 @@ class Token < ApplicationRecord
 
   rails_admin do
     list do
-      fields :id, :code, :created_at, :access_level
+      fields :id, :name, :code, :created_at, :access_level
       field :swagger_link do
         label 'Swagger'
       end
@@ -16,6 +16,6 @@ class Token < ApplicationRecord
   end
 
   def swagger_link
-    link_to 'open doc', Rails.application.routes.url_helpers.swagger_docs_path(token: code)
+    link_to 'open doc', "#{Rails.application.routes.url_helpers.swagger_docs_path(token: code)}#!/remote_query"
   end
 end

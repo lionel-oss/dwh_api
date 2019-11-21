@@ -23,7 +23,7 @@ Swagger::Docs::Config.register_apis(
       # add custom attributes to api-docs
       attributes: {
         info: {
-          title: 'Swagger DAO REST API'
+          title: 'Swagger DWH API'
         }
       }
     }

@@ -14,11 +14,11 @@ class AccessLevel < ApplicationRecord
     exclude_fields :access_level_endpoints, :tokens
 
     object_label_method do
-      :custom_label_method
+      :object_label
     end
   end
 
-  def custom_label_method
+  def object_label
     "level #{self.id}"
   end
 
