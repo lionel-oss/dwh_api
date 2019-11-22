@@ -24,10 +24,52 @@ In this application the user can:
 - [Navigation](#Navigation)
 - [Parameterized query](#Parameterized-query)
 
-## Installation
-### Ruby, Rails and dependencies
+# Installation
 
 Download repository [dwh_api](https://github.com/applift/dwh_api)
+
+## Via Docker
+
+Install [Docker](https://docs.docker.com/install/).
+
+Stop local database 
+- ```sudo service postgresql stop```
+
+Modify database.yml. Uncomment these two lines:
+```
+#host: postgres
+#user: postgres
+```
+
+Build images:
+
+- ```docker-compose build```
+
+Create database:
+
+- ```docker-compose run web rake db:create```
+
+Run all migrations:
+
+- ```docker-compose run web rake db:migrate```
+
+- Create user to login into the application (interface):
+
+```
+rails c
+User.create(login: 'login', email: 'user@email.com', password: 'password')
+```
+
+Start app:
+
+- ```docker-compose run --service-ports web```
+
+URL for the app:
+
+- ```http://localhost:3000```
+
+## Regular installation
+### Ruby, Rails and dependencies
 
 Install [rvm](https://rvm.io/).
 
@@ -66,7 +108,7 @@ rails c
 - Create user to login into the application (interface):
 
 ```
-db_credential = DatabaseCredential.create(user: 'user', password: 'password', database: 'postgres', host: 'localhost', port: '5432')
+User.create(login: 'login', email: 'user@email.com', password: 'password')
 ```
 
 ## Usage
