@@ -32,37 +32,23 @@ Download repository [dwh_api](https://github.com/applift/dwh_api)
 
 Install [Docker](https://docs.docker.com/install/).
 
-Stop local database 
-- ```sudo service postgresql stop```
-
 Modify database.yml. Uncomment these two lines:
 ```
 #host: postgres
 #user: postgres
 ```
 
-Build images:
+Run:
 
-- ```docker-compose build```
-
-Create database:
-
-- ```docker-compose run web rake db:create```
-
-Run all migrations:
-
-- ```docker-compose run web rake db:migrate```
+- ```docker-compose up```
 
 - Create user to login into the application (interface):
 
 ```
-rails c
+docker-compose run web rails c
 User.create(login: 'login', email: 'user@email.com', password: 'password')
 ```
 
-Start app:
-
-- ```docker-compose run --service-ports web```
 
 URL for the app:
 

@@ -12,5 +12,5 @@ ADD Gemfile.lock $APP_PATH/Gemfile.lock
 RUN bundle install
 ADD . $APP_PATH
 
-RUN adduser ubuntu
+RUN adduser --disabled-password --gecos '' ubuntu
 RUN chown -R ubuntu:ubuntu $APP_PATH
