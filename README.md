@@ -19,6 +19,7 @@ In this application the user can:
 # Table of contents
 
 - [Installation](#installation)
+- [Database setup](#database-setup)
 - [Populate database](#populate-database)
 - [Usage](#usage)
 - [Navigation](#Navigation)
@@ -28,15 +29,21 @@ In this application the user can:
 
 Download repository [dwh_api](https://github.com/applift/dwh_api)
 
+## Database setup
+
+All parameters which are set as ENV variables are required, except `RAILS_MAX_THREADS`, by default number of the pool is ```5```
+
+Parameters description
+
+- DATABASE_HOST - Name of host to connect to, ```example '127.0.0.1'```
+- DATABASE_PORT - Port number to connect to at the server host, ```example '5432'```
+- DATABASE_USERNAME - PostgreSQL user name to connect as, ```example 'postgres'```
+- DATABASE_PASSWORD - Password to be used if the server demands password authentication, ```example 'postgres'```
+- DATABASE_NAME - The database name, ```exaple 'dwh_api_development'```
+
 ## Via Docker
 
 Install [Docker](https://docs.docker.com/install/).
-
-Modify database.yml. Uncomment these two lines:
-```
-#host: postgres
-#user: postgres
-```
 
 Run:
 
