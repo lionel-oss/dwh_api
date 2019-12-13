@@ -7,10 +7,10 @@ The solution allows Data warehouse managers (BI Managers, DBA, Data Engineers) f
 
 In many cases the solution accelerate X3 time to go to market in data related applications
 
-In this application the user can: 
+In this application the user can:
 1. Connect to a database
 2. Define query and parameters (i.e. dynamic filters, columns)
-3. Set credentials by specifying access level and tokens 
+3. Set credentials by specifying access level and tokens
 4. Monitor requests
 
 (Current application support DWH based on postgres)
@@ -38,6 +38,10 @@ Install ruby:
 Install dependencies:
 
 - ```bundle install```
+
+Create file with encrypted environment variables
+
+- ```EDITOR=vim rails credentials:edit```
 
 ### Database
 
