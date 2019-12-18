@@ -1,0 +1,43 @@
+version: '3.7'
+
+services:
+  postgres:
+    image: postgres:12.1
+    networks:
+      - dwh-app-tier
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "postgres"]
+
+  web:
+    build: .
+    networks:
+      - dwh-app-tier
+    entrypoint: "./docker-entrypoint.sh"
+    command: bundle exec rails s -p 3000 -b '0.0.0.0'
+    volumes:
+      - .:/usr/lib/app
+    ports:
+      - 3000:3000
+    depends_on:
+      - postgres
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000"]
+    environment:
+      RAILS_ENV: development
+      DATABASE_HOST: postgres
+      DATABASE_PORT: 5432
+      DATABASE_USERNAME: postgres
+      DATABASE_PASSWORD: postgres
+      DATABASE_NAME: dwh_api_development
+
+volumes:
+  postgres-data:
+    driver: local
+
+networks:
+  dwh-app-tier:
+    driver: bridge
