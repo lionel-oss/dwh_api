@@ -10,6 +10,7 @@ jobs:
           BUNDLE_RETRY: 1
           BUNDLE_PATH: vendor/bundle
           DATABASE_HOST: 127.0.0.1
+          DATABASE_PORT: 5432
           DATABASE_USERNAME: postgres
           DATABASE_PASSWORD: postgres
           DATABASE_NAME: dao_backend_test
