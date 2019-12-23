@@ -9,7 +9,7 @@ jobs:
           BUNDLE_JOBS: 1
           BUNDLE_RETRY: 1
           BUNDLE_PATH: vendor/bundle
-          PGHOST: 127.0.0.1
+          DATABASE_HOST: 127.0.0.1
           DATABASE_USERNAME: postgres
           DATABASE_PASSWORD: postgres
           DATABASE_NAME: dao_backend_test
