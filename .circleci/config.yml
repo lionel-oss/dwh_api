@@ -21,6 +21,13 @@ jobs:
     steps:
       - checkout
 
+     #Install dependencies       
+      - run:
+          name: install dependencies
+          command: |
+            gem update --system
+            gem install bundler
+
       # Which version of bundler?
       - run:
           name: Which bundler?
@@ -32,12 +39,7 @@ jobs:
           keys:
             - dao-bundle-v2-{{ checksum "Gemfile.lock" }}
             - dao-bundle-v2-
-     #Install dependencies       
-      - run:
-          name: install dependencies
-          command: |
-            gem update --system
-            gem install bundler
+
 
       - run:
           name: Bundle Install
