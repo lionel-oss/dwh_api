@@ -1,0 +1,64 @@
+version: 2
+jobs:
+  build:
+    parallelism: 1
+    working_directory: ~/dao
+    docker:
+      - image: circleci/ruby:2.5.0-node
+        environment:
+          BUNDLE_JOBS: 1
+          BUNDLE_RETRY: 1
+          BUNDLE_PATH: vendor/bundle
+          PGHOST: 127.0.0.1
+          DATABASE_USERNAME: postgres
+          DATABASE_PASSWORD: postgres
+          DATABASE_NAME: dao_backend_test
+      - image: circleci/postgres:9.6-alpine
+        environment:
+          POSTGRES_USER: postgres
+          POSTGRES_DB: dao_backend_test
+          POSTGRES_PASSWORD: postgres
+    steps:
+      - checkout
+
+      # Which version of bundler?
+      - run:
+          name: Which bundler?
+          command: bundle -v
+
+      # Restore bundle cache
+      - restore_cache:
+          keys:
+            - dao-bundle-v2-{{ checksum "Gemfile.lock" }}
+            - dao-bundle-v2-
+
+      - run:
+          name: Bundle Install
+          command: bundle check || bundle install
+
+      # Store bundle cache
+      - save_cache:
+          key: dao-bundle-v2-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
+
+      - run:
+          name: Wait for DB
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+
+      - run:
+          name: Database setup
+          command: bin/rails db:schema:load --trace
+
+      # Run rspec in parallel
+      - type: shell
+        command: |
+          bundle exec rspec -r rspec_junit_formatter \
+                            --profile 10 \
+                            --format RspecJunitFormatter \
+                            --out test_results/rspec.xml \
+                            --format progress \
+                            $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
+      # Save test results for timing analysis
+      - store_test_results:
+          path: test_results
