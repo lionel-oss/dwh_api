@@ -62,7 +62,7 @@ jobs:
         command: |
           bundle exec rspec -r rspec_junit_formatter \
                             --profile 10 \
-#                            --format RspecJunitFormatter \
+                            --format RspecJunitFormatter \
                             --out test_results/rspec.xml \
                             --format progress \
                             $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
