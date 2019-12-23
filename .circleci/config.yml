@@ -4,7 +4,7 @@ jobs:
     parallelism: 1
     working_directory: ~/dao
     docker:
-      - image: circleci/ruby:2.5.0-node
+      - image: circleci/ruby:2.6.3-node
         environment:
           BUNDLE_JOBS: 1
           BUNDLE_RETRY: 1
@@ -32,6 +32,12 @@ jobs:
           keys:
             - dao-bundle-v2-{{ checksum "Gemfile.lock" }}
             - dao-bundle-v2-
+     #Install dependencies       
+      - run:
+          name: install dependencies
+          command: |
+            gem update --system
+            gem install bundler
 
       - run:
           name: Bundle Install
@@ -56,7 +62,7 @@ jobs:
         command: |
           bundle exec rspec -r rspec_junit_formatter \
                             --profile 10 \
-                            --format RspecJunitFormatter \
+#                            --format RspecJunitFormatter \
                             --out test_results/rspec.xml \
                             --format progress \
                             $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
