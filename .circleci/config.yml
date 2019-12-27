@@ -26,7 +26,7 @@ jobs:
       - run: 
           name: install semantic release
           command: |
-            npm install -g semantic-release-cli
+            sudo npm install -g semantic-release-cli
      #Install dependencies       
       - run:
           name: install dependencies
