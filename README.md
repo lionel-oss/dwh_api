@@ -1,6 +1,6 @@
 # DWH API
-
-![](/public/docs/img/diagram.png)
+[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release) [![CircleCI](https://circleci.com/gh/applift/dwh_api.svg?style=svg)](https://circleci.com/gh/applift/dwh_api) 	![](https://img.shields.io/circleci/build/github/applift/dwh_api?style=plastic) ![](https://img.shields.io/github/v/tag/applift/dwh_api?sort=semver&style=plastic)
+![](/public/docs/img/diagram.png) 
 
 DWH API is an application that creates dynamic REST API endpoints with configuration. User only need to connect to a database know how to write SQL and define the end points and permission.
 The solution allows Data warehouse managers (BI Managers, DBA, Data Engineers) full control on who access to their database without the need to provide database credentials. This application layer release the dependency in database modifications.
@@ -204,3 +204,16 @@ For only “user”:
 http://localhost:3000/api/your_endpoint?token=your_token&user_name='user'
 ```
 
+# Build Process
+DWH API is using CI from Circle CI. 
+
+# Versioning 
+DWH is using semantec versioning. New version is determined based on commit message format (https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#-git-commit-guidelines). 
+
+Here is an example of the release type that will be done based on a commit messages:
+
+|Commit message	|Release type|
+|---------------|------------|
+|fix(pencil): stop graphite breaking when too much pressure applied	|Patch Release|
+|feat(pencil): add 'graphiteWidth' option	|~~Minor~~ Feature Release|
+|perf(pencil): remove graphiteWidth option. BREAKING CHANGE: The graphiteWidth option has been removed. The default graphite width of 10mm is always used for performance reasons.|~~Major~~ Breaking Release|
