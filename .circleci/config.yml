@@ -80,8 +80,8 @@ jobs:
       #     path: test_results
       - run: 
           name: Run Versioning Tool
-          command: |
-            if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              npx semantic-release
-            fi
+          command: npx semantic-release
+            # if [ "${CIRCLE_BRANCH}" == "master" ]; then
+            #   npx semantic-release
+            # fi
       
