@@ -1,4 +1,4 @@
-version: 2
+version: 2.1
 jobs:
   build:
     parallelism: 1
@@ -78,8 +78,21 @@ jobs:
       # # Save test results for timing analysis
       # - store_test_results:
       #     path: test_results
+
+      # Run sonar cloud scan
+      - sonarcloud/scan
+
+      # Run Versioning Tool
       - run: 
           name: Run Versioning Tool
           command: npx semantic-release
 
-      
+# 3rd party integration for sonar cloud.     
+orbs:
+  sonarcloud: sonarsource/sonarcloud@1.0.1
+
+workflows:
+  main:
+    jobs:
+      - build:
+          context: SonarCloud
