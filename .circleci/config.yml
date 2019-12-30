@@ -78,11 +78,15 @@ jobs:
       # # Save test results for timing analysis
       # - store_test_results:
       #     path: test_results
+
+      # Run sonar cloud scan
+      - sonarcloud/scan
+
+      # Run Versioning Tool
       - run: 
           name: Run Versioning Tool
           command: npx semantic-release
-      #Run sonar 
-      - sonarcloud/scan
+      
 orbs:
   sonarcloud: sonarsource/sonarcloud@1.0.1
 
