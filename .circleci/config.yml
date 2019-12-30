@@ -86,7 +86,8 @@ jobs:
       - run: 
           name: Run Versioning Tool
           command: npx semantic-release
-      
+
+# 3rd party integration for sonar cloud.     
 orbs:
   sonarcloud: sonarsource/sonarcloud@1.0.1
 
