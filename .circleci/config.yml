@@ -81,5 +81,14 @@ jobs:
       - run: 
           name: Run Versioning Tool
           command: npx semantic-release
+      
+      - sonarcloud/scan
+orbs:
+  sonarcloud: sonarsource/sonarcloud@1.0.1
 
+workflows:
+  main:
+    jobs:
+      - build:
+          context: SonarCloud
       
