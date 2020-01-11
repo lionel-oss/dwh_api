@@ -23,3 +23,6 @@
 
 #rubymine files
 .idea/
+
+# Ignore IntelliJ files
+*.iml

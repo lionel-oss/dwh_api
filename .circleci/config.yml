@@ -33,6 +33,7 @@ jobs:
           command: |
             gem update --system
             gem install bundler
+            gem install brakeman
 
       # Which version of bundler?
       - run:
@@ -56,6 +57,11 @@ jobs:
           key: dao-bundle-v2-{{ checksum "Gemfile.lock" }}
           paths:
             - vendor/bundle
+
+      - run: 
+          name: Run brakeman check
+          command: |
+            brakeman
 
       - run:
           name: Wait for DB
