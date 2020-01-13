@@ -60,7 +60,7 @@ jobs:
       - run: 
           name: Run brakeman check
           command: |
-            brakeman
+            bundle exec brakeman
 
       - run:
           name: Wait for DB
