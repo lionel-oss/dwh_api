@@ -15,7 +15,7 @@ In this application the user can:
 
 (Current application support DWH based on postgres)
 
-# Services passport:
+# Services documentation:
 https://medium.com/engineering-applift/controlling-data-warehouse-consumers-via-dwh-api-d5ae2f5c584c
 
 # Table of contents
@@ -165,6 +165,12 @@ http://localhost:3000/swagger_docs?token=your_token
 Where your_token is the token.code
 
 
+HTTP call:
+```
+GET http://localhost:3000/api/{your_endpoint}?token={your_token}
+```
+
+
 ## Parameterized query
 
 
@@ -210,11 +216,6 @@ where login = COALESCE (%{user_name}, login);
 ```
 
 Here we have set it up so that when no input is chosen, it will return all values in the database, and when a specific user name (aka login) is chosen, only their information will be returned. The API for both cases would thus look like this:
-
-For all:
-```
-http://localhost:3000/api/your_endpoint?token=your_token
-```
 
 For only “user”:
 ```
