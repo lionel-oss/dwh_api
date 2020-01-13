@@ -33,7 +33,6 @@ jobs:
           command: |
             gem update --system
             gem install bundler
-            gem install brakeman
 
       # Which version of bundler?
       - run:

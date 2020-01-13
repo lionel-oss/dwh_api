@@ -26,3 +26,7 @@
 
 # Ignore IntelliJ files
 *.iml
+
+# Ignore Ruby plugin files
+.generators
+.rakeTasks
