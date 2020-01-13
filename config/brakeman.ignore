@@ -1,0 +1,26 @@
+{
+  "ignored_warnings": [
+    {
+      "warning_type": "Dangerous Send",
+      "warning_code": 23,
+      "fingerprint": "68c752b9d5210b2fbf766d8feaf987b98dc4c7c052aaac3736836e5ca29c6df4",
+      "check_name": "Send",
+      "message": "User controlled method execution",
+      "file": "app/controllers/swagger_controller.rb",
+      "line": 22,
+      "link": "https://brakemanscanner.org/docs/warning_types/dangerous_send/",
+      "code": "send(params[:resource_name])",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "SwaggerController",
+        "method": "resource_docs"
+      },
+      "user_input": "params[:resource_name]",
+      "confidence": "High",
+      "note": "Resources are dynamic by design"
+    }
+  ],
+  "updated": "2020-01-11 13:03:07 +0100",
+  "brakeman_version": "4.7.2"
+}
